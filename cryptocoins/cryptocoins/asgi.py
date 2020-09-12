@@ -1,5 +1,5 @@
 """
-ASGI config for CryptoCoins project.
+ASGI config for cryptocoins project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
