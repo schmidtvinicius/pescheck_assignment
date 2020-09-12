@@ -10,4 +10,4 @@ def home(request):
     url = (f'http://newsapi.org/v2/everything?q=crypto&sortBy=publishedAt&apiKey={api_key}')
     response = requests.get(url)
     json_object = response.json()
-    return HttpResponse(f'<p>{json_object["totalResults"]}</p>')
+    return HttpResponse(f'<p>{json_object["articles"]}</p>')
