@@ -1,1 +1,1 @@
-web: gunicorn cryptocoins.cryptocoins.wsgi
+web: gunicorn cryptocoins.wsgi
