@@ -5,6 +5,7 @@ Django==3.0.3
 django-on-heroku==1.0.1
 gunicorn==20.0.4
 idna==2.8
+newsapi-python==0.2.6
 psycopg2-binary==2.8.6
 python-dateutil==2.7.3
 pytz==2019.3
