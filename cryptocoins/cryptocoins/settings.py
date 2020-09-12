@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'CryptoCoins.urls'
+ROOT_URLCONF = 'cryptocoins.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'CryptoCoins.wsgi.application'
+WSGI_APPLICATION = 'cryptocoins.wsgi.application'
 
 
 # Database
