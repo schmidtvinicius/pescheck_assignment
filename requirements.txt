@@ -15,8 +15,6 @@ psycopg2-binary==2.8.6
 python-dateutil==2.7.3
 pytz==2019.3
 regex==2019.8.19
-requests==2.19.1
-requests-unixsocket==0.2.0
 Routes==2.4.1
 six==1.14.0
 urllib3==1.25.8
