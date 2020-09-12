@@ -19,4 +19,4 @@ def home(request):
             "url": article["url"]
         }
         articles_list.append(short_article)
-    return HttpResponse(f'<p>{articles_list}</p>')
+    return HttpResponse(f'<p>currently showing{len(articles_list)}articles</p><p>{articles_list}</p>')
