@@ -1,1 +1,1 @@
-web: gunicorn CryptoCoins.wsgi --log-file -
+web: gunicorn CryptoDashboard.wsgi --log-file -
