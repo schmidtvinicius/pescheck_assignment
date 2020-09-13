@@ -22,6 +22,5 @@ def crypto_articles(request, currency_code):
         currency = CryptoCurrency.objects.get(code=currency_code)
     except CryptoCurrency.DoesNotExist:
         raise Http404('Crypto currency not found!')
-    top_headlines = newsapi.get_everything(q=currency.name,
-                                        domains='https://www.coindesk.com/, https://cointelegraph.com/tags/cryptocurrencies, https://cryptonews.com/')
+    top_headlines = newsapi.get_everything(q=currency.name)
     return HttpResponse(f'<p>{top_headlines}</p>')
