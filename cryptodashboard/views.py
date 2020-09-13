@@ -7,9 +7,10 @@ api_key='3779ffddd95448f6ac0bc70bb87524e5'
 
 # Create your views here.
 def home(request):
-    url = (f'http://newsapi.org/v2/top-headlines?q=cryptocurrency&apiKey={api_key}')
+    url = (f'http://newsapi.org/v2/top-headlines?q=bitcoin&apiKey={api_key}')
     response = requests.get(url)
     json_object = response.json()
+    total_results = json_object["totalResults"]
     articles_list = []
     for article in json_object["articles"]:
         short_article = {
@@ -20,4 +21,4 @@ def home(request):
             "description": article["description"]
         }
         articles_list.append(short_article)
-    return HttpResponse(f'<p>currently showing{len(articles_list)}articles</p><p>{articles_list}</p>')
+    return HttpResponse(f'<p>currently showing{total_results}articles</p><p>{articles_list}</p>')
