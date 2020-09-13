@@ -14,5 +14,5 @@ def load_articles():
         all_articles = top_headlines['articles']
         for tmp_article in all_articles:
             article = Article(title=tmp_article['title'], author=tmp_article['author'], description=tmp_article['description'], url=tmp_article['url'])
-            article.currencies_discussed.add(currency)
             article.save()
+            article.currencies_discussed.add(currency)
