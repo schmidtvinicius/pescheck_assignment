@@ -1,5 +1,6 @@
 certifi==2019.11.28
 chardet==3.0.4
+crypto-news-api==2.3.1
 dj-database-url==0.5.0
 Django==3.0.3
 django-on-heroku==1.0.1
