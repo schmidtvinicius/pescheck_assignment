@@ -5,7 +5,7 @@
     <ul>
         {% for currency in all_currencies %}
             <li>
-                <a href="% url 'currency_articles' currency.code %}">{{ currency.name }}</a>
+                <a href="{% url 'currency_articles' currency.code %}">{{ currency.name }}</a>
             </li>
         {% endfor %}
     </ul>
