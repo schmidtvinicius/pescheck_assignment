@@ -28,7 +28,7 @@ def currency_articles(request, currency_code):
     all_articles = Article.objects.all()
     matching_articles = []
     for article in all_articles:
-        currencies_discussed = article.currencies_discussed
+        currencies_discussed = article.currencies_discussed.all()
         if currency.name in currencies_discussed:
             matching_articles.append(article)
     return render(request, 'currency_articles.html', {
