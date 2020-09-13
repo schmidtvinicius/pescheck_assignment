@@ -7,7 +7,7 @@ newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
 # Create your views here.
 def home(request):
-    top_headlines = newsapi.get_top_headlines(q='bitcoin', sources='bbc-news')
+    all_articles = newsapi.get_everything(q='bitcoin')
     return render(request, 'home.html', {
-        'top_headlines': top_headlines,
+        'top_headlines': all_articles,
     })
