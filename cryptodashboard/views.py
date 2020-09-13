@@ -17,10 +17,13 @@ def home(request):
         'all_currencies': CryptoCurrency.objects.all(),
     })
 
-def crypto_articles(request, currency_code):
+def currency_articles(request, currency_code):
     try:
         currency = CryptoCurrency.objects.get(code=currency_code)
     except CryptoCurrency.DoesNotExist:
         raise Http404('Crypto currency not found!')
     top_headlines = newsapi.get_everything(q=f'crypto AND {currency.name}')
-    return HttpResponse(f'<p>{top_headlines} {currency.name.lower()}</p>')
+    all_articles = top_headlines["articles"]
+    return render(request, 'currency_articles.html', {
+        'articles': all_articles, 
+    })
