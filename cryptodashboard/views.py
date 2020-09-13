@@ -9,12 +9,8 @@ from .management.commands import load_crypto_data
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
-OBJECTS_TO_DELETE = ['NMC', 'PPC', 'GRC', 'XPM', 'AUR', 'MZC', 'POT', 'TIT', 'XVG', 'VTC', 'Nano', 'EOS']
-
 # Create your views here.
 def home(request):
-    for bla in OBJECTS_TO_DELETE:
-        CryptoCurrency.objects.filter(code=bla).delete()
     if not CryptoCurrency.objects.exists():
         load_crypto_data
     return render(request, 'home.html', {
