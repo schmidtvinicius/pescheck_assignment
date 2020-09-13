@@ -4,8 +4,9 @@ from django.http import Http404
 from newsapi import NewsApiClient
 import requests
 import json
-from .models import CryptoCurrency
+from .models import CryptoCurrency, Article
 from .management.commands import load_crypto_data
+from .management.commands import load_articles
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
@@ -22,8 +23,14 @@ def currency_articles(request, currency_code):
         currency = CryptoCurrency.objects.get(code=currency_code)
     except CryptoCurrency.DoesNotExist:
         raise Http404('Crypto currency not found!')
-    top_headlines = newsapi.get_everything(q=f'crypto AND {currency.name}')
-    all_articles = top_headlines["articles"]
+    if(not Article.objects.exists()):
+        load_articles
+    all_articles = Article.objects.all()
+    matching_articles = []
+    for article in all_articles:
+        currencies_discussed = article['currencies_discussed']
+        if currency.name in currencies_discussed:
+            matching_articles.append(article)
     return render(request, 'currency_articles.html', {
-        'articles': all_articles, 
+        'articles': matching_articles, 
     })

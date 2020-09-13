@@ -4,7 +4,12 @@
     <select>Bla</select>
     <ul>
         {% for article in articles %}
-            <li>article</li>
+            <li>
+                <h2>Title: {{ article.title }}</h2>
+                <h3>Author: {{  article.author }}</h3>
+                <h3>Description: {{  article.description }}</h3>
+                <a href="{% article.url %}">{{  article.url }}</a>
+            </li>
         {% endfor %}
     </ul>
 </main>
