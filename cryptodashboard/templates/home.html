@@ -3,10 +3,9 @@
 <main>
     <select>Bla</select>
     <ul>
-        <li>item1</li>
-        <li>item2</li>
-        <li>item3</li>
-        <li>item4</li>
+        {% for top_headline in top_headlines %}
+            <li>top_headline</li>
+        {% endfor %}
     </ul>
 </main>
 {% endblock %}
