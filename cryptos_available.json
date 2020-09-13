@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Bitcoin",
+    "code": "BTC"
+  },
+  {
+    "name": "Litecoin",
+    "code": "LTC"
+  },
+  {
+    "name": "Namecoin",
+    "code": "NMC"
+  },
+  {
+    "name": "Peercoin",
+    "code": "PPC"
+  },
+  {
+    "name": "Dogecoin",
+    "code": "XDG"
+  },
+  {
+    "name": "Gridcoin",
+    "code": "GRC"
+  },
+  {
+    "name": "Primecoin",
+    "code": "XPM"
+  },
+  {
+    "name": "Ripple",
+    "code": "XRP"
+  },
+  {
+    "name": "Nxt",
+    "code": "NXT"
+  },
+  {
+    "name": "Auroracoin",
+    "code": "AUR"
+  },
+  {
+    "name": "Dash",
+    "code": "DASH"
+  },
+  {
+    "name": "NEO",
+    "code": "NEO"
+  },
+  {
+    "name": "MazaCoin",
+    "code": "MZC"
+  },
+  {
+    "name": "Monero",
+    "code": "XMR"
+  },
+  {
+    "name": "NEM",
+    "code": "XEM"
+  },
+  {
+    "name": "PotCoin",
+    "code": "POT"
+  },
+  {
+    "name": "Titcoin",
+    "code": "TIT"
+  },
+  {
+    "name": "Verge",
+    "code": "XVG"
+  },
+  {
+    "name": "Stellar",
+    "code": "XLM"
+  },
+  {
+    "name": "Vertcoin",
+    "code": "VTC"
+  },
+  {
+    "name": "Ethereum",
+    "code": "ETH"
+  },
+  {
+    "name": "Ethereum Classic",
+    "code": "ETC"
+  },
+  {
+    "name": "Nano",
+    "code": "Nano"
+  },
+  {
+    "name": "Tether",
+    "code": "USDT"
+  },
+  {
+    "name": "Zcash",
+    "code": "ZEC"
+  },
+  {
+    "name": "Bitcoin Cash",
+    "code": "BCH"
+  },
+  {
+    "name": "EOS.IO",
+    "code": "EOS"
+  }
+]
