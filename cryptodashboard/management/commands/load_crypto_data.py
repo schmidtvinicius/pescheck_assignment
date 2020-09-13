@@ -17,18 +17,15 @@ first delete the db.sqlite3 file to destroy the database.
 Then, run `python manage.py migrate` for a new empty
 database with tables"""
 
-
-class Command(BaseCommand):
-    
-    def handle(self, *args, **options):
-        raw_data = open(CRYPTOS_AVAILABLE, 'r')
-        crypto_json = json.loads(raw_data.read())
-        if not CryptoCurrency.objects.exists():
-            for crypto in crypto_json:
-                currency = CryptoCurrency()
-                currency.name = crypto["name"]
-                currency.code = crypto["code"]
-                currency.save()
+def load_crypto_currencies():
+    raw_data = open(CRYPTOS_AVAILABLE, 'r')
+    crypto_json = json.loads(raw_data.read())
+    if not CryptoCurrency.objects.exists():
+        for crypto in crypto_json:
+            currency = CryptoCurrency()
+            currency.name = crypto["name"]
+            currency.code = crypto["code"]
+            currency.save()
 
     # Show this when the user types help
     # help = "Loads data from pet_data.csv into our Pet mode"
