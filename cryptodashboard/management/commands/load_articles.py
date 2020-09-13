@@ -16,6 +16,6 @@ def load_articles():
             article = Article(title=tmp_article['title'], author=tmp_article['author'], description=tmp_article['description'], url=tmp_article['url'])
             article_body = tmp_article['content']
             for currency_topic in all_currencies:
-                if currency_topic in article_body:
+                if currency_topic.name in article_body:
                     article.currencies_discussed.add(currency_topic.name)
             article.save()
