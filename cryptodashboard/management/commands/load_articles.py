@@ -1,7 +1,7 @@
 from newsapi import NewsApiClient
 from cryptodashboard.models import CryptoCurrency, Article
 from django.core.management import BaseCommand
-from commands import load_crypto_data
+from . import load_crypto_data
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
