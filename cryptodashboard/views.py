@@ -16,7 +16,6 @@ def home(request):
     if not CryptoCurrency.objects.exists():
         # load_crypto_currencies()
         return ('<p>false</p>')
-    return ('<p>true</p>')
     # return render(request, 'home.html', {
     #     'all_currencies': CryptoCurrency.objects.all(),
     # })
