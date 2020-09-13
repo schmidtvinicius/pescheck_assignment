@@ -17,5 +17,5 @@ def load_articles():
             article_body = tmp_article['content']
             for currency_topic in all_currencies:
                 if currency_topic.name in article_body:
-                    article.currencies_discussed.add(currency_topic.name)
+                    article.currencies_discussed.add(currency_topic)
             article.save()
