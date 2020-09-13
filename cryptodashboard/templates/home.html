@@ -2,6 +2,12 @@
 {% block content %}
 <main>
     <select>Bla</select>
-    <h2>{{ top_headlines }}</h2>
+    <ul>
+        {% for currency in all_currencies %}
+            <li>
+                <a href="% url 'currency news' currency.code %}">{{ currency.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 </main>
 {% endblock %}

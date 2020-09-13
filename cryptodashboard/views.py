@@ -4,22 +4,14 @@ from newsapi import NewsApiClient
 import requests
 import json
 from .models import CryptoCurrency
+from management.commands import load_crypto_data
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
-CRYPTOS_AVAILABLE = 'cryptos_available.json'
-
 # Create your views here.
 def home(request):
-    raw_data = open(CRYPTOS_AVAILABLE, 'r')
-    crypto_json = json.loads(raw_data.read())
     if not CryptoCurrency.objects.exists():
-        for crypto in crypto_json:
-            currency = CryptoCurrency()
-            currency.name = crypto["name"]
-            currency.code = crypto["code"]
-            currency.save()
-    all_articles = newsapi.get_everything(q='bitcoin')
+        load_crypto_data
     return render(request, 'home.html', {
-        'top_headlines': CryptoCurrency.objects.all(),
+        'all_currencies': CryptoCurrency.objects.all(),
     })
