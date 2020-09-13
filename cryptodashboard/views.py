@@ -7,7 +7,7 @@ api_key='3779ffddd95448f6ac0bc70bb87524e5'
 
 # Create your views here.
 def home(request):
-    url = (f'http://newsapi.org/v2/top-headlines?q=bitcoin&apiKey={api_key}')
+    url = (f'https://newsapi.org/v2/top-headlines?q=trump&apiKey={api_key}')
     response = requests.get(url)
     json_object = response.json()
     total_results = json_object["totalResults"]
