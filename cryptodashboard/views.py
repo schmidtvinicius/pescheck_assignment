@@ -15,7 +15,7 @@ def home(request):
     Article.objects.all().delete()
     if not CryptoCurrency.objects.exists():
         # load_crypto_currencies()
-        return ('<p>false</p>')
+        return HttpResponse('<p>false</p>')
     # return render(request, 'home.html', {
     #     'all_currencies': CryptoCurrency.objects.all(),
     # })
