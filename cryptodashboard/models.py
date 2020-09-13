@@ -9,8 +9,8 @@ class CryptoCurrency(models.Model):
         return f'{self.name} ({self.code})'
 
 class Article(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=25)
+    title = models.TextField()
+    author = models.TextField()
     description = models.TextField(blank=False)
     url = models.TextField(blank=False)
     currencies_discussed = models.ManyToManyField('CryptoCurrency', blank=False)
