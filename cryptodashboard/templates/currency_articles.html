@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <form id="order-options">
+    <form id="order-options">Order by:
         <select name="order-by">
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="alphabetical">Alphabetical</option>
+            {% for order_by_option in order_by_options %}
+                <option value="{{ order_by_option }}">{{ order_by_option }}</option>
+            {% endfor %}
         </select>
         <button type="submit" form="order-options">Apply</button>
     </form>

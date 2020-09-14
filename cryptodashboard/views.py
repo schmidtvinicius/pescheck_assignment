@@ -28,7 +28,7 @@ def currency_articles(request, currency_code):
         raise Http404('Crypto currency not found!')
     order_by = request.GET.get('order-by')
     if order_by == None:
-        order_by = ORDER_BY_OPTIONS.index('Newest')
+        order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
     if(not Article.objects.exists()):
         load_articles()
     all_articles = Article.objects.all().order_by()
