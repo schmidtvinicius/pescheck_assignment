@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
+from django.http import HttpResponseBadRequest
 from newsapi import NewsApiClient
 import requests
 import json
@@ -38,6 +39,8 @@ def currency_articles(request, currency_code):
         all_articles = Article.objects.all().order_by('-published_at')
     elif order_by == ORDER_BY_OPTIONS[2]:
         all_articles = Article.objects.all().order_by('title')
+    else:
+        return HttpResponseBadRequest('No such filter')
     dates = []
     matching_articles = []
     for article in all_articles:
