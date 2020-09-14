@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <select>Bla</select>
+    <form id="order-options">
+        <select name="order-by">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="alphabetical">Alphabetical</option>
+        </select>
+        <button type="submit" form="order-options">Apply</button>
+    </form>
     <ul>
         {% for article in articles %}
             <li>
