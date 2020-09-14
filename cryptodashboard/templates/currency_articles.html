@@ -12,6 +12,9 @@
         Filter date:
         <select name="filter-date">
             <option disabled selected value> -- select an option -- </option>
+            {% for date in dates %}
+                <option value="{{ date }}">{{ date }}</option>
+            {% endfor %}
         </select>
         <button type="submit" form="order-and-filter">Apply</button>
     </form>
