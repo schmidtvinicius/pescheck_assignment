@@ -29,9 +29,11 @@ def currency_articles(request, currency_code='BTC'):
     all_articles = Article.objects.all()
     matching_articles = []
     for article in all_articles:
-        currencies_discussed = article.currencies_discussed.all()
-        if currencies_discussed.get(name=currency.name) != None:
+        try:
+            matching_currency = article.currencies_discussed.get(name=currency.name)
             matching_articles.append(article)
+        except CryptoCurrency.DoesNotExist:
+            matching_currency = None
     return render(request, 'currency_articles.html', {
         'articles': matching_articles, 
     })
