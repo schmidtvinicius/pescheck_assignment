@@ -78,8 +78,13 @@ WSGI_APPLICATION = 'cryptocoins.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd4o1vhjghhhmuu',
+        'USER': 'dfbckcponkquob',
+        'PASSWORD': 'd68395c7c5f6575983b624f48082c1135a22f373f54e858c833e16acce68e15a',
+        'HOST': 'ec2-34-232-212-164.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 
