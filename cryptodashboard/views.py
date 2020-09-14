@@ -31,7 +31,12 @@ def currency_articles(request, currency_code):
         order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
     if(not Article.objects.exists()):
         load_articles()
-    all_articles = Article.objects.all().order_by()
+    if order_by == ORDER_BY_OPTIONS[0]:
+        all_articles = Article.objects.all().order_by('published_at')
+    elif order_by == ORDER_BY_OPTIONS[1]:
+        all_articles = Article.objects.all().order_by('-published_at')
+    else:
+        all_articles = Article.objects.all().order_by('title')
     matching_articles = []
     for article in all_articles:
         try:
