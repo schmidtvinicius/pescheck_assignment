@@ -27,6 +27,7 @@ def currency_articles(request, currency_code):
     except CryptoCurrency.DoesNotExist:
         raise Http404('Crypto currency not found!')
     order_by = request.GET.get('order-by')
+    filter_date = request.GET.get('filter-date')
     if order_by == None:
         order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
     if(not Article.objects.exists()):
@@ -37,15 +38,17 @@ def currency_articles(request, currency_code):
         all_articles = Article.objects.all().order_by('-published_at')
     elif order_by == ORDER_BY_OPTIONS[2]:
         all_articles = Article.objects.all().order_by('title')
-    
+    dates = []
     matching_articles = []
     for article in all_articles:
         try:
             matching_currency = article.currencies_discussed.get(name=currency.name)
             matching_articles.append(article)
+            dates.append(article.published_at)
         except CryptoCurrency.DoesNotExist:
             matching_currency = None
     return render(request, 'currency_articles.html', {
         'articles': matching_articles,
+        'dates': dates,
         'order_by_options': ORDER_BY_OPTIONS,
     })

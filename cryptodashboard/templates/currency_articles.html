@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <form id="order-options">
-        <select name="order-by">Order by:
+    <form id="order-and-filer">
+        Order by:
+        <select name="order-by">
             <option disabled selected value> -- select an option -- </option>
             {% for order_by_option in order_by_options %}
                 <option value="{{ order_by_option }}">{{ order_by_option }}</option>
             {% endfor %}
         </select>
-        <select>Filter date:
+        Filter date:
+        <select name="filter-date">
             <option disabled selected value> -- select an option -- </option>
         </select>
-        <button type="submit" form="order-options">Apply</button>
+        <button type="submit" form="order-and-filter">Apply</button>
     </form>
     <ul>
         {% for article in articles %}
