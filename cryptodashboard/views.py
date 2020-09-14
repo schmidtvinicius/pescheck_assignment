@@ -43,9 +43,9 @@ def currency_articles(request, currency_code):
     if order_by == ORDER_BY_OPTIONS[0]:
         all_articles = Article.objects.filter(published_at=filter_date).order_by('published_at')
     elif order_by == ORDER_BY_OPTIONS[1]:
-        all_articles = Article.objects.all(published_at=filter_date).order_by('-published_at')
+        all_articles = Article.objects.filter(published_at=filter_date).order_by('-published_at')
     elif order_by == ORDER_BY_OPTIONS[2]:
-        all_articles = Article.objects.all(published_at=filter_date).order_by('title')
+        all_articles = Article.objects.filter(published_at=filter_date).order_by('title')
     else:
         return HttpResponseBadRequest(f'Cannot order by {order_by}')
     dates = []
