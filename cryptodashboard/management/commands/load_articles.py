@@ -7,7 +7,7 @@ from datetime import datetime
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
-DATETIME_FORMAT = '%Y/%m/%d'
+DATETIME_FORMAT = '%Y-%m-%d'
 
 def load_articles():
     if not CryptoCurrency.objects.exists():
@@ -20,7 +20,9 @@ def load_articles():
         for tmp_article in all_articles:
             if not tmp_article["url"] in all_urls:
                 all_urls.append(tmp_article["url"])
-                published_at = UTC.localize(datetime.strptime(tmp_article["publishedAt"], DATETIME_FORMAT))
+                published_at = tmp_article["publishedAt"]
+                published_at = published_at.split('T', 1)
+                published_at = UTC.localize(datetime.strptime(published_at, DATETIME_FORMAT))
                 article = Article(title=tmp_article["title"], 
                                     author=tmp_article["author"], 
                                     description=tmp_article["description"], 
