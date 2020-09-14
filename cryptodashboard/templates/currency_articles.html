@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <form id="order-and-filer">
+    <form id="order-and-filter">
         Order by:
         <select name="order-by">
             <option disabled selected value> -- select an option -- </option>
@@ -11,7 +11,7 @@
         </select>
         Filter date:
         <select name="filter-date">
-            <option disabled selected value> -- select an option -- </option>
+            <option>All</option>
             {% for date in dates %}
                 <option value="{{ date }}">{{ date }}</option>
             {% endfor %}
