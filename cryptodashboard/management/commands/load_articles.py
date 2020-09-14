@@ -22,7 +22,7 @@ def load_articles():
                 all_urls.append(tmp_article["url"])
                 published_at = tmp_article["publishedAt"]
                 published_at = published_at.split('T', 1)
-                published_at = UTC.localize(datetime.strptime(published_at, DATETIME_FORMAT))
+                published_at = UTC.localize(datetime.strptime(published_at[0], DATETIME_FORMAT))
                 article = Article(title=tmp_article["title"], 
                                     author=tmp_article["author"], 
                                     description=tmp_article["description"], 
