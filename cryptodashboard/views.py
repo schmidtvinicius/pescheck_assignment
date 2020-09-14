@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.http import HttpResponseBadRequest
 from newsapi import NewsApiClient
+import re
 import requests
 import json
 from .models import CryptoCurrency, Article
@@ -10,6 +11,8 @@ from .management.commands.load_crypto_data import load_crypto_currencies
 from .management.commands.load_articles import load_articles
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
+
+date_pattern = re.compile('^[0-9]{4}-[01][1-9]-[01][1-9]$')
 
 ORDER_BY_OPTIONS = ('Oldest', 'Newest', 'Alphabetical')
 
@@ -29,18 +32,20 @@ def currency_articles(request, currency_code):
         raise Http404('Crypto currency not found!')
     order_by = request.GET.get('order-by')
     filter_date = request.GET.get('filter-date')
+    if filter_date != '' and not date_pattern.match(filter_date):
+        return HttpResponseBadRequest('Given date is invalid')
     if order_by == None:
         order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
     if(not Article.objects.exists()):
         load_articles()
     if order_by == ORDER_BY_OPTIONS[0]:
-        all_articles = Article.objects.all().order_by('published_at')
+        all_articles = Article.objects.filter(published_at=filter_date).order_by('published_at')
     elif order_by == ORDER_BY_OPTIONS[1]:
-        all_articles = Article.objects.all().order_by('-published_at')
+        all_articles = Article.objects.all(published_at=filter_date).order_by('-published_at')
     elif order_by == ORDER_BY_OPTIONS[2]:
-        all_articles = Article.objects.all().order_by('title')
+        all_articles = Article.objects.all(published_at=filter_date).order_by('title')
     else:
-        return HttpResponseBadRequest()
+        return HttpResponseBadRequest(f'Cannot order by {order_by}')
     dates = []
     matching_articles = []
     for article in all_articles:
