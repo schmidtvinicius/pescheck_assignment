@@ -40,7 +40,7 @@ def currency_articles(request, currency_code):
     elif order_by == ORDER_BY_OPTIONS[2]:
         all_articles = Article.objects.all().order_by('title')
     else:
-        return HttpResponseBadRequest('No such filter')
+        return HttpResponseBadRequest()
     dates = []
     matching_articles = []
     for article in all_articles:
