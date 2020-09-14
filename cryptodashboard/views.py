@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.http import HttpResponseBadRequest
 from newsapi import NewsApiClient
+from pytz import UTC
+from datetime import datetime
 import re
 import requests
 import json
@@ -15,6 +17,8 @@ newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 date_pattern = re.compile('^[0-9]{4}-[01][1-9]-[01][1-9]$')
 
 ORDER_BY_OPTIONS = ('Oldest', 'Newest', 'Alphabetical')
+
+DATE_FORMAT = '%Y-%m-%d'
 
 # Create your views here.
 def home(request):
@@ -32,6 +36,7 @@ def currency_articles(request, currency_code):
         raise Http404('Crypto currency not found!')
     order_by = request.GET.get('order-by')
     filter_date = request.GET.get('filter-date')
+    filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
     if filter_date == None:
         filter_date = ''
     if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
