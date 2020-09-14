@@ -10,7 +10,7 @@ class CryptoCurrency(models.Model):
 
 class Article(models.Model):
     title = models.TextField()
-    author = models.TextField()
+    author = models.TextField(null=False, blank=False)
     description = models.TextField(blank=False)
     url = models.TextField(blank=False)
     published_at = models.DateField(null=True)
