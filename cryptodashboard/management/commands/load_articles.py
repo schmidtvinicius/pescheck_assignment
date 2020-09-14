@@ -9,10 +9,16 @@ def load_articles():
     if not CryptoCurrency.objects.exists():
         load_crypto_currencies()
     all_currencies = CryptoCurrency.objects.all()
+    all_urls = []
     for currency in all_currencies:
         top_headlines = newsapi.get_everything(q=f'crypto AND {currency.name}', page_size=100)
-        all_articles = top_headlines['articles']
+        all_articles = top_headlines["articles"]
         for tmp_article in all_articles:
-            article = Article(title=tmp_article['title'], author=tmp_article['author'], description=tmp_article['description'], url=tmp_article['url'])
-            article.save()
-            article.currencies_discussed.add(currency)
+            if not tmp_article["url"] in all_urls:
+                all_urls.append(tmp_article["url"])
+                article = Article(title=tmp_article["title"], author=tmp_article["author"], description=tmp_article["description"], url=tmp_article["url"])
+                article.save()
+                article.currencies_discussed.add(currency)
+            else:
+                Article.objects.get(url=tmp_article["url"]).currencies_discussed.add(currency)
+                
