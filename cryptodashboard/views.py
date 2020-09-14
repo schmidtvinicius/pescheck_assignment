@@ -12,9 +12,9 @@ newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
 # Create your views here.
 def home(request):
-    #Article.objects.all().delete()
-    if not CryptoCurrency.objects.exists():
-        load_crypto_currencies()
+    Article.objects.all().delete()
+    # if not CryptoCurrency.objects.exists():
+    #     load_crypto_currencies()
     return render(request, 'home.html', {
         'all_currencies': CryptoCurrency.objects.all(),
     })

@@ -16,7 +16,11 @@ def load_articles():
         for tmp_article in all_articles:
             if not tmp_article["url"] in all_urls:
                 all_urls.append(tmp_article["url"])
-                article = Article(title=tmp_article["title"], author=tmp_article["author"], description=tmp_article["description"], url=tmp_article["url"])
+                article = Article(title=tmp_article["title"], 
+                                    author=tmp_article["author"], 
+                                    description=tmp_article["description"], 
+                                    url=tmp_article["url"], 
+                                    published_at=tmp_article["publishedAt"])
                 article.save()
                 article.currencies_discussed.add(currency)
             else:
