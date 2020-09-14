@@ -13,7 +13,7 @@ class Article(models.Model):
     author = models.TextField()
     description = models.TextField(blank=False)
     url = models.TextField(blank=False)
-    published_at = models.DateField()
+    published_at = models.DateField(null=True)
     currencies_discussed = models.ManyToManyField('CryptoCurrency', blank=False)
 
 
