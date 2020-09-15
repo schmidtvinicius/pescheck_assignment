@@ -43,7 +43,7 @@ def currency_articles(request, currency_code):
         load_articles()
 
     order_by = request.GET.get('order-by')
-    filter_date = request.GET.get('filter-domain')
+    filter_domain = request.GET.get('filter-domain')
     if filter_domain == None:
         filter_domain = ''
     # if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
