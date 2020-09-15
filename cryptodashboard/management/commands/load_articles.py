@@ -49,10 +49,13 @@ def update_articles():
         todays_articles = everything["articles"]
         for todays_article in todays_articles:
             if not todays_article["url"] in urls:
-                new_article = Article(title=tmp_article["title"], 
-                                    author=tmp_article["author"], 
-                                    description=tmp_article["description"], 
-                                    url=tmp_article["url"], 
+                published_at = todays_article["publishedAt"]
+                published_at = published_at.split('T', 1)
+                published_at = UTC.localize(datetime.strptime(published_at[0], DATETIME_FORMAT))
+                new_article = Article(title=todays_article["title"], 
+                                    author=todays_article["author"], 
+                                    description=todays_article["description"], 
+                                    url=todays_article["url"], 
                                     published_at=published_at)
                 new_article.save()
                 new_article.currencies_discussed.add(currency)
