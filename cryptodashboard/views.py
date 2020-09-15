@@ -16,7 +16,11 @@ newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
 date_pattern = re.compile('^[0-9]{4}-[01][1-9]-[01][1-9]$')
 
-ORDER_BY_OPTIONS = ('Oldest', 'Newest', 'Alphabetical')
+ORDER_BY_OPTIONS = {
+    'Oldest': 'published_at', 
+    'Newest': '-published_at', 
+    'Alphabetical': 'title'
+}
 
 DATE_FORMAT = '%Y-%m-%d'
 
@@ -40,24 +44,18 @@ def currency_articles(request, currency_code):
 
     order_by = request.GET.get('order-by')
     filter_date = request.GET.get('filter-date')
-    if filter_date == None:
-        all_articles = Article.objects.all()
-    else:
-        filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
     if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
         return HttpResponseBadRequest('Given date is invalid')
     
     if order_by == None:
         order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
     
-    if order_by == ORDER_BY_OPTIONS[0]:
-        all_articles = Article.objects.filter(published_at=filter_date).order_by('published_at')
-    elif order_by == ORDER_BY_OPTIONS[1]:
-        all_articles = Article.objects.filter(published_at=filter_date).order_by('-published_at')
-    elif order_by == ORDER_BY_OPTIONS[2]:
-        all_articles = Article.objects.filter(published_at=filter_date).order_by('title')
+    if filter_date == '':
+        all_articles = Article.objects.all().order_by(order_by)
     else:
-        return HttpResponseBadRequest(f'Cannot order by {order_by}')
+        filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
+        all_articles = Article.objects.filter(published_at=filter_date).order_by(order_by)
+    
     dates = []
     matching_articles = []
     for article in all_articles:
@@ -70,5 +68,5 @@ def currency_articles(request, currency_code):
     return render(request, 'currency_articles.html', {
         'articles': matching_articles,
         'dates': dates,
-        'order_by_options': ORDER_BY_OPTIONS,
+        'order_by_options': ORDER_BY_OPTIONS.keys,
     })
