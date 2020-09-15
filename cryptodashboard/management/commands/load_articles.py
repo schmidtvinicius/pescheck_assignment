@@ -63,7 +63,7 @@ def update_articles():
                 for currency_discussed in currencies_discussed:
                     if currency.code == currency_discussed.code:
                         contains_currency = True
-                Article.objects.get(url=todays_article["url"]).currencies_discussed.add(currencies_discussed) if contains_currency == False
+                Article.objects.get(url=todays_article["url"]).currencies_discussed.add(currencies_discussed) if not contains_currency
         
     saved_articles = Article.objects.filter(published_at=TODAY)
 
