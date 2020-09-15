@@ -50,7 +50,7 @@ def currency_articles(request, currency_code):
         return HttpResponseBadRequest('Given date is invalid')
     
     if order_by == None:
-        order_by = ORDER_BY_OPTIONS[ORDER_BY_OPTIONS.index('Newest')]
+        order_by = ORDER_BY_OPTIONS.get('Newest')
     
     if filter_date == '':
         all_articles = Article.objects.all().order_by(order_by)
