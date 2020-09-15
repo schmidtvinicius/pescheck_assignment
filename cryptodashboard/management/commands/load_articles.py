@@ -40,7 +40,7 @@ def update_articles():
     if not Article.objects.exists():
         load_articles
     
-    urls = load_todays_urls
+    urls = load_todays_urls()
 
     # todays_saved_articles = Article.objects.filter(published_at=TODAY)
     all_currencies = CryptoCurrency.objects.all()
