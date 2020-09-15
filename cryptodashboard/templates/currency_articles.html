@@ -10,10 +10,10 @@
             {% endfor %}
         </select>
         Filter date:
-        <select name="filter-date">
+        <select name="filter-domain">
             <option value="">All</option>
-            {% for date in dates %}
-                <option value="{{ date }}">{{ date }}</option>
+            {% for domain in domains %}
+                <option value="{{ domain }}">{{ domain }}</option>
             {% endfor %}
         </select>
         <button type="submit" form="order-and-filter">Apply</button>

@@ -59,17 +59,18 @@ def currency_articles(request, currency_code):
         #filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
         all_articles = Article.objects.filter(published_at=filter_date).order_by(ORDER_BY_OPTIONS[order_by])
     
-    dates = []
+    domains = []
     matching_articles = []
     for article in all_articles:
         try:
             matching_currency = article.currencies_discussed.get(name=currency.name)
             matching_articles.append(article)
-            dates.append(article.published_at)
+            split_url = article.url.spli('/')
+            domains.append(split_url[1])
         except CryptoCurrency.DoesNotExist:
             matching_currency = None
     return render(request, 'currency_articles.html', {
         'articles': matching_articles,
-        'dates': dates,
+        'domains': domains,
         'order_by_options': ORDER_BY_OPTIONS.keys,
     })
