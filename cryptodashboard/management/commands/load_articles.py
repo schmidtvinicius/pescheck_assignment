@@ -42,7 +42,7 @@ def update_articles():
     
     urls = load_todays_urls
 
-    todays_saved_articles = Article.objects.filter(published_at=TODAY)
+    # todays_saved_articles = Article.objects.filter(published_at=TODAY)
     all_currencies = CryptoCurrency.objects.all()
     for currency in all_currencies:
         everything = newsapi.get_everything(q=f'crypto AND {currency.name}', page_size=100, from_param=TODAY)
@@ -63,9 +63,10 @@ def update_articles():
                 for currency_discussed in currencies_discussed:
                     if currency.code == currency_discussed.code:
                         contains_currency = True
-                Article.objects.get(url=todays_article["url"]).currencies_discussed.add(currencies_discussed) if not contains_currency
+                if not contains_currency:
+                    Article.objects.get(url=todays_article["url"]).currencies_discussed.add(currencies_discussed)
         
-    saved_articles = Article.objects.filter(published_at=TODAY)
+    # saved_articles = Article.objects.filter(published_at=TODAY)
 
 def load_todays_urls():
     todays_articles = Article.objects.filter(published_at=TODAY)
