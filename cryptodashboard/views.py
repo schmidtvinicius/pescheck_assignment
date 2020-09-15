@@ -8,9 +8,12 @@ from datetime import datetime
 import re
 import requests
 import json
+import sched
+import time
 from .models import CryptoCurrency, Article
 from .management.commands.load_crypto_data import load_crypto_currencies
 from .management.commands.load_articles import load_articles
+from .management.commands.load_articles import update_articles
 
 newsapi = NewsApiClient(api_key='3779ffddd95448f6ac0bc70bb87524e5')
 
@@ -41,6 +44,8 @@ def currency_articles(request, currency_code):
 
     if(not Article.objects.exists()):
         load_articles()
+
+    update_articles()
 
     order_by = request.GET.get('order-by')
     filter_domain = request.GET.get('filter-domain')
