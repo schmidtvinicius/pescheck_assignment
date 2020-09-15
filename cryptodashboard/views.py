@@ -55,7 +55,7 @@ def currency_articles(request, currency_code):
     if filter_domain == '':
         all_articles = Article.objects.all().order_by(ORDER_BY_OPTIONS[order_by])
     else: 
-        all_articles = Article.objects.filter(published_at=filter_date).order_by(ORDER_BY_OPTIONS[order_by])
+        all_articles = Article.objects.get(published_at__contains=filter_domain).order_by(ORDER_BY_OPTIONS[order_by])
     
     domains = []
     matching_articles = []
@@ -65,8 +65,7 @@ def currency_articles(request, currency_code):
             matching_articles.append(article)
             split_url = article.url.split('/')
             if not split_url[2] in domains:
-                domain = 'https://'+split_url[2]
-                domains.append(domain)
+                domains.append(split_url[2])
         except CryptoCurrency.DoesNotExist:
             matching_currency = None
     return render(request, 'currency_articles.html', {
