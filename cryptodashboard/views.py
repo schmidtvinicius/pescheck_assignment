@@ -66,7 +66,8 @@ def currency_articles(request, currency_code):
             matching_currency = article.currencies_discussed.get(name=currency.name)
             matching_articles.append(article)
             split_url = article.url.split('/')
-            domains.append(split_url[2])
+            if not split_url[2] in domains:
+                domains.append(split_url[2])
         except CryptoCurrency.DoesNotExist:
             matching_currency = None
     return render(request, 'currency_articles.html', {
