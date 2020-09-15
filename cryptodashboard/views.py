@@ -53,10 +53,10 @@ def currency_articles(request, currency_code):
         order_by = ORDER_BY_OPTIONS.get('Newest')
     
     if filter_date == '':
-        all_articles = Article.objects.all().order_by(order_by)
+        all_articles = Article.objects.all().order_by(ORDER_BY_OPTIONS.get(order_by))
     else:
         filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
-        all_articles = Article.objects.filter(published_at=filter_date).order_by(order_by)
+        all_articles = Article.objects.filter(published_at=filter_date).order_by(ORDER_BY_OPTIONS.get(order_by))
     
     dates = []
     matching_articles = []
