@@ -43,20 +43,18 @@ def currency_articles(request, currency_code):
         load_articles()
 
     order_by = request.GET.get('order-by')
-    filter_date = request.GET.get('filter-date')
-    if filter_date == None:
-        filter_date = ''
+    filter_date = request.GET.get('filter-domain')
+    if filter_domain == None:
+        filter_domain = ''
     # if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
     #     return HttpResponseBadRequest('Given date is invalid')
     
     if order_by == None:
         order_by = 'Newest'
     
-    if filter_date == '':
+    if filter_domain == '':
         all_articles = Article.objects.all().order_by(ORDER_BY_OPTIONS[order_by])
-    else:
-        filter_date = datetime.strftime(DATE_FORMAT, filter_date)
-        #filter_date = UTC.localize(datetime.strptime(filter_date, DATE_FORMAT))
+    else: 
         all_articles = Article.objects.filter(published_at=filter_date).order_by(ORDER_BY_OPTIONS[order_by])
     
     domains = []
@@ -67,7 +65,8 @@ def currency_articles(request, currency_code):
             matching_articles.append(article)
             split_url = article.url.split('/')
             if not split_url[2] in domains:
-                domains.append(split_url[2])
+                domain = 'https://'+split_url[2]
+                domains.append(domain)
         except CryptoCurrency.DoesNotExist:
             matching_currency = None
     return render(request, 'currency_articles.html', {
