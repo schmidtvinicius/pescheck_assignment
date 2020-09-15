@@ -46,8 +46,8 @@ def currency_articles(request, currency_code):
     filter_date = request.GET.get('filter-date')
     if filter_date == None:
         filter_date = ''
-    if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
-        return HttpResponseBadRequest('Given date is invalid')
+    # if str(filter_date) != '' and not date_pattern.match(str(filter_date)):
+    #     return HttpResponseBadRequest('Given date is invalid')
     
     if order_by == None:
         order_by = 'Newest'
