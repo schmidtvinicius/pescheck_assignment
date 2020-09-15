@@ -55,7 +55,7 @@ def currency_articles(request, currency_code):
     if filter_domain == '':
         all_articles = Article.objects.all().order_by(ORDER_BY_OPTIONS[order_by])
     else: 
-        all_articles = Article.objects.get(published_at__contains=filter_domain).order_by(ORDER_BY_OPTIONS[order_by])
+        all_articles = Article.objects.get(published_at__contains=f'%{filter_domain}%').order_by(ORDER_BY_OPTIONS[order_by])
     
     domains = []
     matching_articles = []
